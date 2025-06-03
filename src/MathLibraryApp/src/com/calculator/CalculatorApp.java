@@ -21,8 +21,12 @@ public class CalculatorApp {
         System.out.println("2. Subtract");
         System.out.println("3. Multiply");
         System.out.println("4. Divide");
+        System.out.println("5. Square (first number)");
+        System.out.println("6. Cube (second number)");
+        System.out.println("7. Factorial (first number)");
+        System.out.println("8. Get MathLibrary version");
 
-        int choice = readIntInRange(scanner, "Enter your choice (From 1 to 4): ", 1, 4);
+        int choice = readIntInRange(scanner, "Enter your choice (From 1 to 8): ", 1, 8);
         double result;
 
         try {
@@ -39,22 +43,38 @@ public class CalculatorApp {
                 case 4:
                     result = MathLibrary.divide(firstNumber, secondNumber);
                     break;
+                case 5:
+                    result = MathLibrary.square(firstNumber);
+                    break;
+                case 6:
+                    result = MathLibrary.cube(secondNumber);
+                    break;
+                case 7:
+                    if (firstNumber < 0 || firstNumber != Math.floor(firstNumber)) {
+                        throw new ArithmeticException("Factorial is  only defined for non-negative integers.");
+                    }
+                    result = MathLibrary.factorial(firstNumber);
+                    break;
+                case 8:
+                    System.out.println("MathLibrary version: " + MathLibrary.getVersion());
+                    scanner.close();
+                    return;
                 default:
                     throw new IllegalStateException("Unexpected value: " + choice);
             }
 
             if (Double.isInfinite(result)) {
-                System.out.println("⚠️ Result is infinite. This may indicate overflow or division by zero.");
+                System.out.println("Result is infinite. This may indicate overflow or division by zero.");
             } else if (Double.isNaN(result)) {
-                System.out.println("⚠️ Result is not a number (NaN).");
+                System.out.println("Result is not a number (NaN).");
             } else {
-                System.out.println("✅ Result: " + result);
+                System.out.println("Result: " + result);
             }
 
         } catch (ArithmeticException ex) {
-            System.out.println("🚫 Error: " + ex.getMessage());
+            System.out.println(" Error: " + ex.getMessage());
         } catch (Exception ex) {
-            System.out.println("🚫 Unexpected error: " + ex.getMessage());
+            System.out.println("Unexpected error: " + ex.getMessage());
         } finally {
             scanner.close();
         }
@@ -73,14 +93,14 @@ public class CalculatorApp {
                 number = Double.parseDouble(input);
                 valid = true;
             } catch (NumberFormatException e) {
-                System.out.println("❌ Invalid number. Please enter a valid numeric value.");
+                System.out.println("Invalid number. Please enter a valid numeric value.");
             }
         }
         return number;
     }
 
     /**
-     * Reads an integer input from user within a specified range.
+     * Reads an integer choice input from user within a specified range.
      */
     private static int readIntInRange(Scanner scanner, String prompt, int min, int max) {
         int choice = -1;
@@ -93,10 +113,10 @@ public class CalculatorApp {
                 if (choice >= min && choice <= max) {
                     valid = true;
                 } else {
-                    System.out.println("❌ Choice out of range. Please select between " + min + " and " + max + ".");
+                    System.out.println("Choice out of range. Please select between " + min + " and " + max + ".");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("❌ Invalid input. Please enter a number.");
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
         return choice;
@@ -108,6 +128,9 @@ public class CalculatorApp {
     }
 }
 
+/**
+ * ORIGINAL CODE SNIPPET
+ */
 
 // package com.calculator;
 
