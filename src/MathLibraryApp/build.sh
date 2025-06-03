@@ -1,67 +1,47 @@
-# Complete build process for both thin and fat JARs
+#!/bin/bash
 
-echo "=== Building MathLibrary and Calculator ==="
+# Create output directories if they don't exist
+mkdir -p bin
+mkdir -p lib
 
-# 1. Create MathLibrary JAR
-echo "Creating MathLibrary JAR..."
-jar cf lib/mathlib.jar -C bin com/mathlib
+REBUILD_MATHLIB=false
+REBUILD_CALCAPP=false
 
-# 2. Create Thin JAR (Method 1 -Simplest)
-echo "Creating Thin JAR with main class..."
-echo " From the root directory, run the following command- to verify and prove the class just in case:"
-javac -cp lib/MathLibrary.jar -d bin src/com/calculator/CalculatorApp.java
+# Check if MathLibrary.java is newer than its class
+if [[ src/com/mathlib/MathLibrary.java -nt bin/com/mathlib/MathLibrary.class ]]; then
+  REBUILD_MATHLIB=true
+fi
 
-echo "To now create the thin JAR, run the following command:"
-jar cfe CalculatorApp-Thin.jar com.calculator.CalculatorApp -C bin com
-echo " 
-    com.calculator.CalculatorApp is your main class 
-    (ensure the class is declared like this: package com.calculator;)
-    -C bin com tells the jar tool to start from bin and include the full com folder hierarchy
-    "
-# Note: The above command assumes that the CalculatorApp class is in the package com.calculator
-# If you want to create a thin JAR without specifying the main class, you can use:
-# Uncomment the following line to create a thin JAR without specifying the main class
-# jar cf CalculatorApp-Thin.jar -C bin com/calculator
-# If you want to create a thin JAR with the main class specified, use:
-# jar cfe CalculatorApp-Thin.jar com.calculator.CalculatorApp -C bin com
+# Check if CalculatorApp.java is newer than its class
+if [[ src/com/calculator/CalculatorApp.java -nt bin/com/calculator/CalculatorApp.class ]]; then
+  REBUILD_CALCAPP=true
+fi
 
-# 3. Create Thin JAR (Method 2 - using custom manifest)
-echo "Creating custom manifest..."
-cat > MANIFEST.MF << EOF
-Manifest-Version: 1.0
-Main-Class: com.calculator.CalculatorApp
-Class-Path: lib/mathlib.jar
-EOF
+if $REBUILD_MATHLIB || $REBUILD_CALCAPP; then
+  if $REBUILD_MATHLIB; then
+    echo "Compiling MathLibrary..."
+    javac -d bin src/com/mathlib/MathLibrary.java
 
-echo "Creating Thin JAR with manifest..."
-jar cfm CalculatorApp-Thin-WithManifest.jar MANIFEST.MF -C bin com/calculator
+    echo "Creating MathLibrary.jar..."
+    jar cf lib/MathLibrary.jar -C bin com/mathlib
+  fi
 
-# 4. Create Fat JAR
-echo "Creating Fat JAR..."
-mkdir temp
-cd temp
-jar xf ../lib/mathlib.jar
-jar xf ../CalculatorApp-Thin.jar
-jar cfe ../CalculatorApp-Fat.jar com.calculator.CalculatorApp .
-cd ..
-rm -rf temp
+  echo "Compiling CalculatorApp..."
+  javac -cp lib/MathLibrary.jar -d bin src/com/calculator/CalculatorApp.java
 
-echo "=== Build Complete ==="
-echo "Files created:"
-echo "- lib/mathlib.jar (library)"
-echo "- CalculatorApp-Thin.jar (needs classpath)"
-echo "- CalculatorApp-Thin-WithManifest.jar (includes classpath in manifest)"
-echo "- CalculatorApp-Fat.jar (self-contained)"
+  echo "Creating CalculatorApp-Thin.jar..."
+  jar cfe CalculatorThin.jar com.calculator.CalculatorApp -C bin com
 
-echo "=== How to Run === On WINDOWS, check documentation for running JARs on Linux/MacOS=== "
-echo "Thin JAR (Method 1):"
-echo "java -cp ""CalculatorThin.jar;lib/MathLibrary.jar"" com.calculator.CalculatorApp"
-echo
-echo "Thin JAR (Method 2 - with manifest):"
-echo "java -jar CalculatorApp-Thin-WithManifest.jar"
-echo
-echo "Fat JAR:"
-echo "java -jar CalculatorApp-Fat.jar"
+  echo "Creating Fat JAR..."
+  mkdir temp
+  cd temp
+  jar xf ../lib/MathLibrary.jar
+  jar xf ../CalculatorApp-Thin.jar
+  jar cfe ../CalculatorApp-Fat.jar com.calculator.CalculatorApp .
+  cd ..
+  rm -rf temp
 
-# Clean up
-rm -f MANIFEST.MF
+  echo "✅ Build complete."
+else
+  echo "No changes detected. Skipping compilation and packaging."
+fi
