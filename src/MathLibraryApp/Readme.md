@@ -503,7 +503,7 @@ jar ufm calculator-thin.jar temp-manifest.mf
 
 ```bash
 # Check JAR contents
-jar tf calculator-thin.jar
+jar tf CalculatorApp-thin.jar
 
 # Expected output should include:
 # com/calculator/CalculatorApp.class
