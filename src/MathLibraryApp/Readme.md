@@ -39,8 +39,7 @@ The project showcases:
 
 ## Project Structure
 
-```
-project/
+```project/
 ├── src/                          # Source code directory
 │   └── com/
 │       ├── mathlib/             # MathLibrary package
@@ -94,7 +93,7 @@ project/
 **Package**: `com.calculator`  
 **Purpose**: Interactive console calculator using MathLibrary
 
-#### Features
+#### Main Features
 
 - Menu-driven interface
 - Input validation and error handling
@@ -287,6 +286,7 @@ java -jar CalculatorApp-thin.jar
 ```
 
 ### More about Thin Jars
+
 💡 Reminder of Key Points:
 
 - Thin JAR doesn’t bundle dependencies, so we include both the app JAR and library JAR in the `-cp.com.calculator.CalculatorApp` must match your main class's package and class name.

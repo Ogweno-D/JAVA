@@ -1,11 +1,10 @@
 package com.calculator;
 
 import com.mathlib.MathLibrary;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * A secure and robust calculator application that performs basic arithmetic operations
+ * A t calculator application that performs basic arithmetic operations
  * and handles edge cases and input validation.
  */
 public class CalculatorApp {
@@ -31,36 +30,24 @@ public class CalculatorApp {
 
         try {
             switch (choice) {
-                case 1:
-                    result = MathLibrary.add(firstNumber, secondNumber);
-                    break;
-                case 2:
-                    result = MathLibrary.subtract(firstNumber, secondNumber);
-                    break;
-                case 3:
-                    result = MathLibrary.multiply(firstNumber, secondNumber);
-                    break;
-                case 4:
-                    result = MathLibrary.divide(firstNumber, secondNumber);
-                    break;
-                case 5:
-                    result = MathLibrary.square(firstNumber);
-                    break;
-                case 6:
-                    result = MathLibrary.cube(secondNumber);
-                    break;
-                case 7:
+                case 1 -> result = MathLibrary.add(firstNumber, secondNumber);
+                case 2 -> result = MathLibrary.subtract(firstNumber, secondNumber);
+                case 3 -> result = MathLibrary.multiply(firstNumber, secondNumber);
+                case 4 -> result = MathLibrary.divide(firstNumber, secondNumber);
+                case 5 -> result = MathLibrary.square(firstNumber);
+                case 6 -> result = MathLibrary.cube(secondNumber);
+                case 7 -> {
                     if (firstNumber < 0 || firstNumber != Math.floor(firstNumber)) {
                         throw new ArithmeticException("Factorial is  only defined for non-negative integers.");
                     }
                     result = MathLibrary.factorial(firstNumber);
-                    break;
-                case 8:
+                }
+                case 8 -> {
                     System.out.println("MathLibrary version: " + MathLibrary.getVersion());
                     scanner.close();
                     return;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + choice);
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + choice);
             }
 
             if (Double.isInfinite(result)) {
@@ -73,7 +60,7 @@ public class CalculatorApp {
 
         } catch (ArithmeticException ex) {
             System.out.println(" Error: " + ex.getMessage());
-        } catch (Exception ex) {
+        } catch (IllegalStateException | NullPointerException ex) {
             System.out.println("Unexpected error: " + ex.getMessage());
         } finally {
             scanner.close();
