@@ -33,115 +33,115 @@
 // ========== IMPLEMENTATION ==========
 
 // Abstract parent class
-abstract class Employees {
-    // Properties (instance variables)
-    protected int employeeNumber;
-    protected String employeeName;
-    protected double netSalary;
+// abstract class Employees {
+//     // Properties (instance variables)
+//     protected int employeeNumber;
+//     protected String employeeName;
+//     protected double netSalary;
     
-    // Constructor
-    public Employees(int employeeNumber, String employeeName) {
-        this.employeeNumber = employeeNumber;
-        this.employeeName = employeeName;
-        this.netSalary = 0.0; // Will be calculated by child classes
-    }
+//     // Constructor
+//     public Employees(int employeeNumber, String employeeName) {
+//         this.employeeNumber = employeeNumber;
+//         this.employeeName = employeeName;
+//         this.netSalary = 0.0; // Will be calculated by child classes
+//     }
     
-    // Abstract method - must be implemented by child classes
-    public abstract void calculateSalary();
+//     // Abstract method - must be implemented by child classes
+//     public abstract void calculateSalary();
     
-    // Concrete method - inherited by all child classes
-    public void displayEmployeeDetails() {
-        System.out.println("Employee Number: " + employeeNumber);
-        System.out.println("Employee Name: " + employeeName);
-    }
+//     // Concrete method - inherited by all child classes
+//     public void displayEmployeeDetails() {
+//         System.out.println("Employee Number: " + employeeNumber);
+//         System.out.println("Employee Name: " + employeeName);
+//     }
     
-    // Getter methods
-    public double getNetSalary() {
-        return netSalary;
-    }
+//     // Getter methods
+//     public double getNetSalary() {
+//         return netSalary;
+//     }
     
-    public int getEmployeeNumber() {
-        return employeeNumber;
-    }
+//     public int getEmployeeNumber() {
+//         return employeeNumber;
+//     }
     
-    public String getEmployeeName() {
-        return employeeName;
-    }
-}
+//     public String getEmployeeName() {
+//         return employeeName;
+//     }
+// }
 
-// Concrete child class for Full-Time Employees
-class FullTimeEmployee extends Employees {
-    private double baseSalary;
-    private double bonus;
-    private double benefits;
+// // Concrete child class for Full-Time Employees
+// class FullTimeEmployee extends Employees {
+//     private double baseSalary;
+//     private double bonus;
+//     private double benefits;
     
-    // Constructor
-    public FullTimeEmployee(int employeeNumber, String employeeName, 
-                           double baseSalary, double bonus, double benefits) {
-        super(employeeNumber, employeeName); // Call parent constructor
-        this.baseSalary = baseSalary;
-        this.bonus = bonus;
-        this.benefits = benefits;
-    }
+//     // Constructor
+//     public FullTimeEmployee(int employeeNumber, String employeeName, 
+//                            double baseSalary, double bonus, double benefits) {
+//         super(employeeNumber, employeeName); // Call parent constructor
+//         this.baseSalary = baseSalary;
+//         this.bonus = bonus;
+//         this.benefits = benefits;
+//     }
     
-    // Implementation of abstract method
-    @Override
-    public void calculateSalary() {
-        // Full-time salary = base + bonus + benefits
-        this.netSalary = baseSalary + bonus + benefits;
-        System.out.println("\n=== FULL-TIME EMPLOYEE SALARY CALCULATION ===");
-        System.out.println("Base Salary: $" + baseSalary);
-        System.out.println("Bonus: $" + bonus);
-        System.out.println("Benefits: $" + benefits);
-        System.out.println("Net Salary: $" + netSalary);
-    }
+//     // Implementation of abstract method
+//     @Override
+//     public void calculateSalary() {
+//         // Full-time salary = base + bonus + benefits
+//         this.netSalary = baseSalary + bonus + benefits;
+//         System.out.println("\n=== FULL-TIME EMPLOYEE SALARY CALCULATION ===");
+//         System.out.println("Base Salary: $" + baseSalary);
+//         System.out.println("Bonus: $" + bonus);
+//         System.out.println("Benefits: $" + benefits);
+//         System.out.println("Net Salary: $" + netSalary);
+//     }
     
-    // Override to show more details for full-time employees
-    @Override
-    public void displayEmployeeDetails() {
-        System.out.println("\n=== FULL-TIME EMPLOYEE DETAILS ===");
-        super.displayEmployeeDetails(); // Call parent method
-        System.out.println("Employee Type: Full-Time");
-        System.out.println("Base Salary: $" + baseSalary);
-        System.out.println("Monthly Bonus: $" + bonus);
-        System.out.println("Benefits Package: $" + benefits);
-    }
-}
+//     // Override to show more details for full-time employees
+//     @Override
+//     public void displayEmployeeDetails() {
+//         System.out.println("\n=== FULL-TIME EMPLOYEE DETAILS ===");
+//         super.displayEmployeeDetails(); // Call parent method
+//         System.out.println("Employee Type: Full-Time");
+//         System.out.println("Base Salary: $" + baseSalary);
+//         System.out.println("Monthly Bonus: $" + bonus);
+//         System.out.println("Benefits Package: $" + benefits);
+//     }
+// }
 
 // Concrete child class for Part-Time Employees
-class PartTimeEmployee extends Employees {
-    private double hourlyRate;
-    private int hoursWorked;
+// class PartTimeEmployee extends Employees {
+//     private double hourlyRate;
+//     private int hoursWorked;
     
-    // Constructor
-    public PartTimeEmployee(int employeeNumber, String employeeName, 
-                           double hourlyRate, int hoursWorked) {
-        super(employeeNumber, employeeName); // Call parent constructor
-        this.hourlyRate = hourlyRate;
-        this.hoursWorked = hoursWorked;
-    }
+//     // Constructor
+//     public PartTimeEmployee(int employeeNumber, String employeeName, 
+//                            double hourlyRate, int hoursWorked) {
+//         super(employeeNumber, employeeName); // Call parent constructor
+//         this.hourlyRate = hourlyRate;
+//         this.hoursWorked = hoursWorked;
+//     }
     
-    // Implementation of abstract method
-    @Override
-    public void calculateSalary() {
-        // Part-time salary = hourly rate × hours worked
-        this.netSalary = hourlyRate * hoursWorked;
-        System.out.println("\n=== PART-TIME EMPLOYEE SALARY CALCULATION ===");
-        System.out.println("Hourly Rate: $" + hourlyRate);
-        System.out.println("Hours Worked: " + hoursWorked);
-        System.out.println("Net Salary: $" + netSalary);
-    }
+//     // Implementation of abstract method
+//     @Override
+//     public void calculateSalary() {
+//         // Part-time salary = hourly rate × hours worked
+//         this.netSalary = hourlyRate * hoursWorked;
+//         System.out.println("\n=== PART-TIME EMPLOYEE SALARY CALCULATION ===");
+//         System.out.println("Hourly Rate: $" + hourlyRate);
+//         System.out.println("Hours Worked: " + hoursWorked);
+//         System.out.println("Net Salary: $" + netSalary);
+//     }
     
-    // Override to show more details for part-time employees
-    @Override
-    public void displayEmployeeDetails() {
-        System.out.println("\n=== PART-TIME EMPLOYEE DETAILS ===");
-        super.displayEmployeeDetails(); // Call parent method
-        System.out.println("Employee Type: Part-Time");
-        System.out.println("Hourly Rate: $" + hourlyRate);
-        System.out.println("Hours Worked: " + hoursWorked + " hours");
-    }
-}
+//     // Override to show more details for part-time employees
+//     @Override
+//     public void displayEmployeeDetails() {
+//         System.out.println("\n=== PART-TIME EMPLOYEE DETAILS ===");
+//         super.displayEmployeeDetails(); // Call parent method
+//         System.out.println("Employee Type: Part-Time");
+//         System.out.println("Hourly Rate: $" + hourlyRate);
+//         System.out.println("Hours Worked: " + hoursWorked + " hours");
+//     }
+// }
 
 // // Main class to demonstrate the system
 // public class EmployeeManagementSystem {
