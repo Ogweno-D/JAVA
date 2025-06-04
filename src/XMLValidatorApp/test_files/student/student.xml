@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<student xmlns="http://example.com/students">
+    <id>12345</id>
+    <name>Alice Johnson</name>
+    <email>alice.johnson@example.com</email>
+    <age>22</age>
+    <gpa>3.85</gpa>
+    <courses>
+        <course>Computer Science</course>
+        <course>Mathematics</course>
+        <course>Physics</course>
+    </courses>
+</student>

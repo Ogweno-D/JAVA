@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book xmlns="http://example.com/books">
+    <title>Java Programming Mastery</title>
+    <author>John Developer</author>
+    <year>2024</year>
+    <price>39.99</price>
+    <isbn>978-0123456789</isbn>
+    <category>Programming</category>
+</book>

@@ -1,0 +1,9 @@
+<!-- Invalid book.xml for testing purposes -->
+<?xml version="1.0" encoding="UTF-8"?>
+<book xmlns="http://example.com/books">
+    <title>Invalid Book</title>
+    <author>Test Author</author>
+    <year>not-a-number</year>  <!-- This should cause validation error -->
+    <price>29.99</price>
+    <!-- Missing required elements according to schema -->
+</book>

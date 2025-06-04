@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.com/books"
+           xmlns="http://example.com/books"
+           elementFormDefault="qualified">
+    
+    <xs:element name="book">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="xs:string"/>
+                <xs:element name="author" type="xs:string"/>
+                <xs:element name="year" type="xs:int"/>
+                <xs:element name="price" type="xs:decimal"/>
+                <xs:element name="isbn" type="xs:string" minOccurs="0"/>
+                <xs:element name="category" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
