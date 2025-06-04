@@ -37,9 +37,7 @@ public class XMLValidationErrorHandler implements ErrorHandler {
     public void error(SAXParseException e) throws SAXException {
         String error = formatErrorMessage("ERROR", e);
         errors.add(error);
-        
-        // Don't print errors immediately - they'll be printed in summary
-        // This prevents cluttering output during validation
+    
     }
     
     /**
@@ -50,12 +48,10 @@ public class XMLValidationErrorHandler implements ErrorHandler {
     public void fatalError(SAXParseException e) throws SAXException {
         String fatalError = formatErrorMessage("FATAL ERROR", e);
         fatalErrors.add(fatalError);
-        errors.add(fatalError); // Also add to general errors list
+        errors.add(fatalError); 
         
-        // Fatal errors are serious enough to print immediately
         System.err.println("RUUUUN! MURIFE RUN! THIS IS A FATAL ERROR \n " + fatalError);
-        
-        // Re-throw to stop processing
+   
         throw e;
     }
     
@@ -67,7 +63,7 @@ public class XMLValidationErrorHandler implements ErrorHandler {
         
         sb.append(type);
         
-        // Add location information if available
+       
         if (e.getLineNumber() != -1) {
             sb.append(" at line ").append(e.getLineNumber());
             
@@ -76,7 +72,6 @@ public class XMLValidationErrorHandler implements ErrorHandler {
             }
         }
         
-        // Add system ID (file path) if available
         if (e.getSystemId() != null) {
             sb.append(" in ").append(e.getSystemId());
         }
