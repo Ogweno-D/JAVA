@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<restaurants xmlns="http://example.com/restaurants" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://example.com/restaurants restaurant.xsd">
+  <restaurant id="550e8400-e29b-41d4-a716-446655440000">
+    <name>Urban Eats</name>
+    <location>Nairobi, Kenya</location>
+    <contact>+254700123456</contact>
+    <rating>4.5</rating>
+    <reviews>
+      <review id="3f2504e0-4f89-11d3-9a0c-0305e82c3301">
+        <user>JaneDoe</user>
+        <comment>Amazing vegan options!</comment>
+        <rating>5.0</rating>
+        <date>2025-06-01</date>
+      </review>
+      <review id="3f2504e0-4f89-11d3-9a0c-0305e82c3302">
+        <user>Mike89</user>
+        <comment>Good value for money</comment>
+        <rating>4.0</rating>
+        <date>2025-06-03</date>
+      </review>
+    </reviews>
+    <operatingHours>
+      <day name="Monday">
+        <open>08:00:00</open>
+        <close>22:00:00</close>
+      </day>
+      <day name="Tuesday">
+        <open>08:00:00</open>
+        <close>22:00:00</close>
+      </day>
+      <day name="Wednesday">
+        <open>08:00:00</open>
+        <close>22:00:00</close>
+      </day>
+      <day name="Thursday">
+        <open>08:00:00</open>
+        <close>22:00:00</close>
+      </day>
+      <day name="Friday">
+        <open>08:00:00</open>
+        <close>22:00:00</close>
+      </day>
+    </operatingHours>
+    <menu id="7d444840-9dc0-11d1-b245-5ffdce74fad1">
+      <mealType>Breakfast</mealType>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a5a">
+        <foodName>Avocado Toast</foodName>
+        <price currency="KES">300.00</price>
+        <description>Whole grain toast with smashed avocado and cherry tomatoes</description>
+        <availability>true</availability>
+        <category>Vegan</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a5b">
+        <foodName>Omelette</foodName>
+        <price currency="KES">400.00</price>
+        <description>Three-egg omelette with cheese and vegetables</description>
+        <availability>true</availability>
+        <category>Non-Vegetarian</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a5c">
+        <foodName>Fruit Salad</foodName>
+        <price currency="KES">250.00</price>
+        <description>Fresh seasonal fruits with a honey drizzle</description>
+        <availability>true</availability>
+        <category>Vegan</category>
+      </item>
+    </menu>
+    <menu id="7d444840-9dc0-11d1-b245-5ffdce74fad2">
+      <mealType>Lunch</mealType>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a5f">
+        <foodName>Vegan Wrap</foodName>
+        <price currency="KES">450.00</price>
+        <description>Wrap with avocado, beans, and salsa</description>
+        <availability>true</availability>
+        <category>Vegan</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a60">
+        <foodName>Chicken Pilau</foodName>
+        <price currency="KES">600.00</price>
+        <description>Spiced rice with tender chicken</description>
+        <availability>true</availability>
+        <category>Halal</category>
+      </item>
+    </menu>
+  </restaurant>
+  <restaurant id="550e8400-e29b-41d4-a716-446655440001">
+    <name>Coastal Delights</name>
+    <location>Mombasa, Kenya</location>
+    <contact>+254700654321</contact>
+    <rating>4.8</rating>
+    <reviews>
+      <review id="3f2504e0-4f89-11d3-9a0c-0305e82c3303">
+        <user>AliKhan</user>
+        <comment>Best seafood in town!</comment>
+        <rating>5.0</rating>
+        <date>2025-06-05</date>
+      </review>
+      <review id="3f2504e0-4f89-11d3-9a0c-0305e82c3304">
+        <user>AishaS</user>
+        <comment>Great ambiance and service</comment>
+        <rating>4.5</rating>
+        <date>2025-06-07</date>
+      </review>
+    </reviews>
+    <operatingHours>
+      <day name="Monday">
+        <open>10:00:00</open>
+        <close>23:00:00</close>
+      </day>
+      <day name="Tuesday">
+        <open>10:00:00</open>
+        <close>23:00:00</close>
+      </day>
+      <day name="Wednesday">
+        <open>10:00:00</open>
+        <close>23:00:00</close>
+      </day>
+      <day name="Thursday">
+        <open>10:00:00</open>
+        <close>23:00:00</close>
+      </day>
+      <day name="Friday">
+        <open>10:00:00</open>
+        <close>23:00:00</close>
+      </day>
+    </operatingHours>
+    <menu id="7d444840-9dc0-11d1-b245-5ffdce74fad3">
+      <mealType>Dinner</mealType>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a61">
+        <foodName>Shrimp Curry</foodName>
+        <price currency="KES">800.00</price>
+        <description>Coconut milk-based shrimp curry with spices</description>
+        <availability>true</availability>
+        <category>Seafood</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a62">
+        <foodName>Lobster Grill</foodName>
+        <price currency="KES">1500.00</price>
+        <description>Grilled lobster with garlic butter</description>
+        <availability>true</availability>
+        <category>Seafood</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a63">
+        <foodName>Vegetable Stir Fry</foodName>
+        <price currency="KES">500.00</price>
+        <description>Stir-fried vegetables in a light soy sauce</description>
+        <availability>true</availability>
+        <category>Vegan</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a64">
+        <foodName>Grilled Fish</foodName>
+        <price currency="KES">700.00</price>
+        <description>Fresh fish grilled with herbs</description>
+        <availability>true</availability>
+        <category>Halal</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a65">
+        <foodName>Chicken Biryani</foodName>
+        <price currency="KES">600.00</price>
+        <description>Spiced rice with marinated chicken</description>
+        <availability>true</availability>
+        <category>Halal</category>
+      </item>
+    </menu>
+  </restaurant>
+  <restaurant id="550e8400-e29b-41d4-a716-446655440002">
+    <name>Mountain Grill</name>
+    <location>Nakuru, Kenya</location>
+    <contact>+254700789012</contact>
+    <rating>4.2</rating>
+    <reviews>
+      <review id="3f2504e0-4f89-11d3-9a0c-0305e82c3305">
+        <user>JohnSmith</user>
+        <comment>Great steaks and mountain view</comment>
+        <rating>4.5</rating>
+        <date>2025-06-10</date>
+      </review>
+      <review id="3f2504e0-4f89-11d3-9a0c-0305e82c3306">
+        <user>EmilyR</user>
+        <comment>Cozy atmosphere, loved the desserts</comment>
+        <rating>4.0</rating>
+        <date>2025-06-12</date>
+      </review>
+    </reviews>
+    <operatingHours>
+      <day name="Monday">
+        <open>09:00:00</open>
+        <close>21:00:00</close>
+      </day>
+      <day name="Tuesday">
+        <open>09:00:00</open>
+        <close>21:00:00</close>
+      </day>
+      <day name="Wednesday">
+        <open>09:00:00</open>
+        <close>21:00:00</close>
+      </day>
+      <day name="Thursday">
+        <open>09:00:00</open>
+        <close>21:00:00</close>
+      </day>
+      <day name="Friday">
+        <open>09:00:00</open>
+        <close>21:00:00</close>
+      </day>
+    </operatingHours>
+    <menu id="7d444840-9dc0-11d1-b245-5ffdce74fad4">
+      <mealType>Dinner</mealType>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a66">
+        <foodName>Grilled Steak</foodName>
+        <price currency="KES">1200.00</price>
+        <description>Juicy grilled steak with herbs</description>
+        <availability>true</availability>
+        <category>Non-Vegetarian</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a67">
+        <foodName>Vegetable Pasta</foodName>
+        <price currency="KES">550.00</price>
+        <description>Pasta with fresh vegetables in marinara sauce</description>
+        <availability>true</availability>
+        <category>Vegan</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a68">
+        <foodName>Chocolate Cake</foodName>
+        <price currency="KES">300.00</price>
+        <description>Rich chocolate cake with ganache</description>
+        <availability>true</availability>
+        <category>Dessert</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a69">
+        <foodName>Fruit Tart</foodName>
+        <price currency="KES">350.00</price>
+        <description>Fresh fruit tart with custard filling</description>
+        <availability>true</availability>
+        <category>Dessert</category>
+      </item>
+      <item id="e7d9f952-cbe8-4c19-b48f-1e5c1a680a6a">
+        <foodName>Chicken Caesar Salad</foodName>
+        <price currency="KES">600.00</price>
+        <description>Crisp romaine with grilled chicken and Caesar dressing</description>
+        <availability>true</availability>
+        <category>Non-Vegetarian</category>
+      </item>
+    </menu>
+  </restaurant>
+</restaurants>

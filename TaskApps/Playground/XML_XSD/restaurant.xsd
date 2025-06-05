@@ -1,0 +1,139 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- UUID simple type pattern -->
+  <xs:simpleType name="uuidType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Food Item Type -->
+  <xs:complexType name="itemsType">
+    <xs:sequence>
+      <xs:element name="foodName" type="xs:string"/>
+      <xs:element name="price" type="xs:decimal"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="availability" type="xs:boolean"/>
+      <xs:element name="category" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="uuidType" use="required"/>
+  </xs:complexType>
+
+  <!-- Menu Type -->
+  <xs:complexType name="menuType">
+    <xs:sequence>
+      <xs:element name="mealType" type="xs:string"/>
+      <xs:element name="item" type="itemsType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="uuidType" use="required"/>
+  </xs:complexType>
+
+  <!-- Review Type -->
+  <xs:complexType name="reviewType">
+    <xs:sequence>
+      <xs:element name="user" type="xs:string"/>
+      <xs:element name="comment" type="xs:string"/>
+      <xs:element name="rating" type="xs:decimal"/>
+      <xs:element name="date" type="xs:date"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="uuidType" use="required"/>
+  </xs:complexType>
+
+  <!-- Operating Hours Type -->
+  <xs:complexType name="operatingHoursType">
+    <xs:sequence>
+      <xs:element name="day" type="xs:string" maxOccurs="7"/>
+      <xs:element name="open" type="xs:time"/>
+      <xs:element name="close" type="xs:time"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="uuidType" use="required"/>
+  </xs:complexType>
+
+  <!-- Restaurant Type -->
+  <xs:complexType name="restaurantType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="location" type="xs:string"/>
+      <xs:element name="contact" type="xs:string"/>
+      <xs:element name="rating" type="xs:decimal" minOccurs="0"/>
+      <xs:element name="reviews" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="review" type="reviewType" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="operatingHours" type="operatingHoursType" minOccurs="0"/>
+      <xs:element name="menu" type="menuType"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="uuidType" use="required"/>
+  </xs:complexType>
+
+  <!-- Root element -->
+  <xs:element name="restaurants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="restaurant" type="restaurantType" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
+
+
+<!-- Well a trial ->
+<!
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="resturantType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="location" type="xs:string" />
+            <xs:element name="contact" type="xs:string" />
+            <xs:element name="menu" type="menuType" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:comlexType name="menuType">
+        <xs:sequence>
+            <xs:element name="mealType" type="xs:string" />
+            <xs:element name="items" type="itemsType" />
+        </xs:sequence>
+    </xs:comlexType>
+
+    <xs:complexType name="itemsType">
+        <xs:sequence>
+            <xs:element name="foodName" type="xs:string" />
+            <xs:element name="price" type="xs:decimal" />
+            <xs:element name="description" type="xs:string" minOccurs="0" />
+            <xs:element name="availability" type="xs:boolean" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="restaurant" type="resturantType" />
+    <xs:element name="restaurants">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="restaurant" type="resturantType" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="menu" type="menuType" />
+    <xs:element name="menus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="menu" type="menuType" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="items" type="itemsType" />
+    <xs:element name="itemList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="item" type="itemsType" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema> -->
