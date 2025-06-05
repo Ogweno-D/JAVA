@@ -53,7 +53,7 @@ public abstract class Employee {
      * This method can be overridden by subclasses to provide specific details.
      */
     public void displayEmployeeDetails() {
-        System.out.println("Employe e Name: " + EmployeeName);
+        System.out.println("Employee Name: " + EmployeeName);
         System.out.println("Employee ID: " + EmployeeId);
     }
 
