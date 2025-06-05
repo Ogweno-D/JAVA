@@ -355,4 +355,4 @@ This tutorial is provided under the MIT License. See LICENSE file for details.
 
 ---
 
-*Happy XPath querying! 🚀*
+Happy XPath querying! 🚀
