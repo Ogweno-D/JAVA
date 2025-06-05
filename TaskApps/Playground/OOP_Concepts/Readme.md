@@ -388,7 +388,6 @@ Person person = new Person("John");
 
 OOP makes code more organized, reusable, and maintainable. The four main principles work together to create robust software systems. Practice these concepts with real-world examples to master Java programming! 🚀
 
-
 ## Any Other Important Business! :smile:
 
 ### 1. Rules for Naming Variables
