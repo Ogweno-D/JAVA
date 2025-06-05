@@ -399,5 +399,3 @@ OOP makes code more organized, reusable, and maintainable. The four main princip
 - Names can also begin with `$` and `_`.
 - Names are case-sensitive (e.g., `myVar` and `myvar` are different variables).
 - Reserved words (like Java keywords such as `int` or `boolean`) cannot be used as names.
-
-Ask what SkyWorlds convention is?
