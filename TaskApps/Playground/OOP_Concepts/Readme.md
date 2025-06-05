@@ -387,3 +387,17 @@ Person person = new Person("John");
 ## Conclusion
 
 OOP makes code more organized, reusable, and maintainable. The four main principles work together to create robust software systems. Practice these concepts with real-world examples to master Java programming! 🚀
+
+
+## Any Other Important Business! :smile:
+
+### 1. Rules for Naming Variables
+
+- Names can contain letters, digits, underscores, and dollar signs.
+- Names must begin with a letter.
+- Names should start with a lowercase letter and cannot contain whitespace.
+- Names can also begin with `$` and `_`.
+- Names are case-sensitive (e.g., `myVar` and `myvar` are different variables).
+- Reserved words (like Java keywords such as `int` or `boolean`) cannot be used as names.
+
+Ask what SkyWorlds convention is?
