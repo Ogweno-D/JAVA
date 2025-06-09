@@ -21,7 +21,6 @@ public class DepartmentManager{
         // require non null
         Objects.requireNonNull(employee, "Employee cannot be null");
         
-        // 
         departmentMap.computeIfAbsent(employee.getDepartment(), 
             k-> new ArrayList<>())
                 .add(employee);
@@ -34,6 +33,7 @@ public class DepartmentManager{
                     .filter(e -> e.getEmployeeId() == employeeId)
                     .findFirst();
     }
+
     public Optional<Employee> getEmployee(String employeeNumber) {
         return departmentMap.values().stream()
                 .flatMap(List::stream)
