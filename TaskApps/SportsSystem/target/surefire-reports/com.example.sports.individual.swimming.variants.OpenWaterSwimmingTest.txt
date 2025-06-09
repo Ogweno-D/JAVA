@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: com.example.sports.individual.swimming.variants.OpenWaterSwimmingTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.042 s <<< FAILURE! -- in com.example.sports.individual.swimming.variants.OpenWaterSwimmingTest
+com.example.sports.individual.swimming.variants.OpenWaterSwimmingTest.testPlay -- Time elapsed: 0.026 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+expected: <Competing in open water swimming: Long-distance in natural waters.
+> but was: <Competing in open water swimming: Long-distance in natural waters.
+>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at com.example.sports.individual.swimming.variants.OpenWaterSwimmingTest.testPlay(OpenWaterSwimmingTest.java:18)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
