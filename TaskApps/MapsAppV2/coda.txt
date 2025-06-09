@@ -1,0 +1,335 @@
+// Column.java
+import java.util.Objects;
+
+/**
+ * Represents a database column with ID, name, and data type
+ */
+public class Column {
+    private int columnId;
+    private String columnName;
+    private String dataType;
+    
+    // Default constructor
+    public Column() {}
+    
+    // Parameterized constructor
+    public Column(int columnId, String columnName, String dataType) {
+        this.columnId = columnId;
+        this.columnName = columnName;
+        this.dataType = dataType;
+    }
+    
+    // Getters
+    public int getColumnId() {
+        return columnId;
+    }
+    
+    public String getColumnName() {
+        return columnName;
+    }
+    
+    public String getDataType() {
+        return dataType;
+    }
+    
+    // Setters
+    public void setColumnId(int columnId) {
+        this.columnId = columnId;
+    }
+    
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
+    
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("Column{id=%d, name='%s', type='%s'}", 
+                           columnId, columnName, dataType);
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Column column = (Column) o;
+        return columnId == column.columnId;
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(columnId);
+    }
+}
+
+// Table.java
+import java.util.*;
+
+/**
+ * Represents a database table with ID, name, and ordered columns
+ */
+public class Table {
+    private int tableId;
+    private String tableName;
+    private Map<Integer, Column> columns; // TreeMap for lexicographic ordering by position
+    
+    // Default constructor
+    public Table() {
+        this.columns = new TreeMap<>();
+    }
+    
+    // Parameterized constructor
+    public Table(int tableId, String tableName) {
+        this.tableId = tableId;
+        this.tableName = tableName;
+        this.columns = new TreeMap<>();
+    }
+    
+    // Constructor with columns
+    public Table(int tableId, String tableName, Map<Integer, Column> columns) {
+        this.tableId = tableId;
+        this.tableName = tableName;
+        this.columns = new TreeMap<>(columns);
+    }
+    
+    // Getters
+    public int getTableId() {
+        return tableId;
+    }
+    
+    public String getTableName() {
+        return tableName;
+    }
+    
+    public Map<Integer, Column> getColumns() {
+        return columns;
+    }
+    
+    // Setters
+    public void setTableId(int tableId) {
+        this.tableId = tableId;
+    }
+    
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+    
+    public void setColumns(Map<Integer, Column> columns) {
+        this.columns = new TreeMap<>(columns);
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("Table{id=%d, name='%s', columns=%s}", 
+                           tableId, tableName, columns);
+    }
+}
+
+// TableManager.java
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * Main class for managing tables and columns with CRUD operations
+ */
+public class TableManager {
+    // TreeMap for lexicographic ordering by table name
+    private Map<String, Table> tables;
+    
+    public TableManager() {
+        this.tables = new TreeMap<>();
+    }
+    
+    /**
+     * Add a new table with its columns
+     * @param table The table to add
+     * @return true if table was added successfully, false if table already exists
+     */
+    public boolean addTable(Table table) {
+        if (tables.containsKey(table.getTableName())) {
+            System.out.println("Table '" + table.getTableName() + "' already exists!");
+            return false;
+        }
+        tables.put(table.getTableName(), table);
+        System.out.println("Table '" + table.getTableName() + "' added successfully!");
+        return true;
+    }
+    
+    /**
+     * Add a new column to an existing table
+     * @param tableName The name of the table
+     * @param position The position of the column
+     * @param column The column to add
+     * @return true if column was added successfully
+     */
+    public boolean addColumn(String tableName, int position, Column column) {
+        Table table = tables.get(tableName);
+        if (table == null) {
+            System.out.println("Table '" + tableName + "' not found!");
+            return false;
+        }
+        
+        table.getColumns().put(position, column);
+        System.out.println("Column '" + column.getColumnName() + "' added to table '" + tableName + "'");
+        return true;
+    }
+    
+    /**
+     * Edit an existing column in a table
+     * @param tableName The name of the table
+     * @param position The position of the column to edit
+     * @param newColumn The new column data
+     * @return true if column was edited successfully
+     */
+    public boolean editColumn(String tableName, int position, Column newColumn) {
+        Table table = tables.get(tableName);
+        if (table == null) {
+            System.out.println("Table '" + tableName + "' not found!");
+            return false;
+        }
+        
+        if (!table.getColumns().containsKey(position)) {
+            System.out.println("Column at position " + position + " not found in table '" + tableName + "'");
+            return false;
+        }
+        
+        table.getColumns().put(position, newColumn);
+        System.out.println("Column at position " + position + " in table '" + tableName + "' updated successfully!");
+        return true;
+    }
+    
+    /**
+     * Remove a column from a table
+     * @param tableName The name of the table
+     * @param position The position of the column to remove
+     * @return true if column was removed successfully
+     */
+    public boolean removeColumn(String tableName, int position) {
+        Table table = tables.get(tableName);
+        if (table == null) {
+            System.out.println("Table '" + tableName + "' not found!");
+            return false;
+        }
+        
+        Column removedColumn = table.getColumns().remove(position);
+        if (removedColumn == null) {
+            System.out.println("Column at position " + position + " not found in table '" + tableName + "'");
+            return false;
+        }
+        
+        System.out.println("Column '" + removedColumn.getColumnName() + "' removed from table '" + tableName + "'");
+        return true;
+    }
+    
+    /**
+     * Get tables that have columns with similar names
+     * @param columnName The column name to search for
+     * @return List of table names that contain the specified column name
+     */
+    public List<String> getTablesWithSimilarColumn(String columnName) {
+        return tables.entrySet().stream()
+                .filter(entry -> entry.getValue().getColumns().values().stream()
+                        .anyMatch(column -> column.getColumnName().toLowerCase()
+                                .contains(columnName.toLowerCase())))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+    
+    /**
+     * Display all tables and their columns
+     */
+    public void displayAllTables() {
+        if (tables.isEmpty()) {
+            System.out.println("No tables found!");
+            return;
+        }
+        
+        System.out.println("\n=== ALL TABLES ===");
+        for (Map.Entry<String, Table> entry : tables.entrySet()) {
+            Table table = entry.getValue();
+            System.out.println("\nTable: " + table.getTableName() + " (ID: " + table.getTableId() + ")");
+            System.out.println("Columns:");
+            
+            if (table.getColumns().isEmpty()) {
+                System.out.println("  No columns defined");
+            } else {
+                for (Map.Entry<Integer, Column> colEntry : table.getColumns().entrySet()) {
+                    Column col = colEntry.getValue();
+                    System.out.println("  Position " + colEntry.getKey() + ": " + 
+                                     col.getColumnName() + " (" + col.getDataType() + ") [ID: " + col.getColumnId() + "]");
+                }
+            }
+        }
+        System.out.println("==================");
+    }
+    
+    /**
+     * Get a table by name
+     * @param tableName The name of the table
+     * @return The table or null if not found
+     */
+    public Table getTable(String tableName) {
+        return tables.get(tableName);
+    }
+    
+    /**
+     * Get all tables
+     * @return Map of all tables
+     */
+    public Map<String, Table> getAllTables() {
+        return new TreeMap<>(tables);
+    }
+    
+    // Demo and test methods
+    public static void main(String[] args) {
+        TableManager manager = new TableManager();
+        
+        // Demo: Create tables and columns
+        System.out.println("=== TABLE MANAGEMENT SYSTEM DEMO ===\n");
+        
+        // Create Users table
+        Table usersTable = new Table(1, "users");
+        usersTable.getColumns().put(1, new Column(1, "user_id", "INT"));
+        usersTable.getColumns().put(2, new Column(2, "username", "VARCHAR(50)"));
+        usersTable.getColumns().put(3, new Column(3, "email", "VARCHAR(100)"));
+        usersTable.getColumns().put(4, new Column(4, "date_created", "TIMESTAMP"));
+        
+        // Create Products table
+        Table productsTable = new Table(2, "products");
+        productsTable.getColumns().put(1, new Column(5, "product_id", "INT"));
+        productsTable.getColumns().put(2, new Column(6, "product_name", "VARCHAR(100)"));
+        productsTable.getColumns().put(3, new Column(7, "price", "DECIMAL(10,2)"));
+        productsTable.getColumns().put(4, new Column(8, "date_created", "TIMESTAMP"));
+        
+        // Add tables
+        manager.addTable(usersTable);
+        manager.addTable(productsTable);
+        
+        // Display all tables
+        manager.displayAllTables();
+        
+        // Add a new column to users table
+        System.out.println("\n=== ADDING NEW COLUMN ===");
+        manager.addColumn("users", 5, new Column(9, "last_login", "TIMESTAMP"));
+        
+        // Edit a column
+        System.out.println("\n=== EDITING COLUMN ===");
+        manager.editColumn("users", 2, new Column(2, "username", "VARCHAR(100)"));
+        
+        // Search for tables with similar column names
+        System.out.println("\n=== SEARCHING FOR SIMILAR COLUMNS ===");
+        List<String> tablesWithDateCreated = manager.getTablesWithSimilarColumn("date_created");
+        System.out.println("Tables with 'date_created' column: " + tablesWithDateCreated);
+        
+        // Remove a column
+        System.out.println("\n=== REMOVING COLUMN ===");
+        manager.removeColumn("products", 3);
+        
+        // Final display
+        System.out.println("\n=== FINAL STATE ===");
+        manager.displayAllTables();
+    }
+}
