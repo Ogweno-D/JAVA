@@ -47,7 +47,6 @@ public class DatabaseManager{
     public boolean removeColumn( String tableName, int position){
         if(tables.containsKey(tableName) && tables.get(tableName)
                  .getColumns().containsKey(position)){
-
                     tables.get(tableName).getColumns().remove(position);
                     return true;
                  }
@@ -61,11 +60,12 @@ public class DatabaseManager{
             .filter(entry -> entry.getValue().getColumns().values().stream()
                 .anyMatch(column -> column.getColumnName().equalsIgnoreCase(columnName)))
             .map(Map.Entry::getKey)
-            .collect(Collectors.toCollection(TreeSet::new)); // Maintains order
+            .collect(Collectors.toCollection(TreeSet::new)); 
     }
 
 
      // d. Display All tables and their columns
+     // TreeMap already doe the sorting but why not?
 
         public void displayAllTables() {
             tables.entrySet().stream()
@@ -76,9 +76,27 @@ public class DatabaseManager{
                     entry.getValue().getColumns().entrySet().stream()
                         .sorted(Map.Entry.comparingByKey())
                         .forEach(colEntry -> 
-                            System.out.println("  Position " + colEntry.getKey() + ": " + colEntry.getValue()));
+                            System.out.println(" Position" + " " + colEntry.getKey() + " : " +  colEntry.getValue()));
                     System.out.println();
                 });
+        }
+
+        // sorted (This takes the comparator which here is the Map Entry and 
+        // we are comparing by key!)
+        public void displaySomeTables(){
+            tables.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entry ->{
+                    System.out.println("Tables : " + entry.getKey());
+                    System.out.println( "Columns : ");
+
+                    entry.getValue().getColumns().entrySet().stream()
+                        .sorted(Map.Entry.comparingByKey())
+                        .forEach(colEntry -> 
+                            System.out.println(" Position " + " " + colEntry.getKey() + ":" + colEntry.getValue())
+                         );
+
+                } );
         }
 
 

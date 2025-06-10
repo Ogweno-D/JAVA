@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,9 +8,9 @@ public class Main {
 
         // a. Add new tables with columns
         Map<Integer, Column> userColumns = new TreeMap<>();
-        userColumns.put(1, new Column(1, "user_id", "INT"));
-        userColumns.put(2, new Column(2, "username", "VARCHAR(50)"));
-        userColumns.put(3, new Column(3, "date_created", "DATETIME"));
+        userColumns.put(1, new Column(1, " user_id ", "INT"));
+        userColumns.put(2, new Column(2, " username ", "VARCHAR(50)"));
+        userColumns.put(3, new Column(3, " date_created ", "DATETIME"));
         dbManager.addTable(1, "users", userColumns);
 
         Map<Integer, Column> orderColumns = new TreeMap<>();
@@ -24,7 +26,8 @@ public class Main {
         dbManager.editColumn("orders", 2, new Column(2, "customer_id", "INT"));
 
         // b.3 Remove a column from users table
-        dbManager.removeColumn("users", 3);
+        // This removes the date_created column
+        dbManager.removeColumn(" users ", 3);
 
         // c. Find tables with specific column name
         Set<String> tablesWithDateCreated = dbManager.getTablesWithColumnName("date_created");
@@ -32,5 +35,6 @@ public class Main {
 
         // d. Display all tables and columns
         dbManager.displayAllTables();
+        
     }
 }
