@@ -40,8 +40,10 @@ public class Column{
 
     @Override
     public String toString(){
-        return   "\n" + "{" + "\n" +
-                "ColumnId" + " " + columnId + "\n" +
+        return   """
+                 
+                 {
+                 ColumnId """ + columnId + "\n" +
                 "ColumnName " + " " + columnName + " \n" +
                 "Data Type "+ " "+  dataType + "\n" +
                 "}";

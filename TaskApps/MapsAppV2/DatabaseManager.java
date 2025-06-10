@@ -9,7 +9,7 @@ public class DatabaseManager{
 
     // Why use a tree MAp this time? It shall maintain the order
 
-    private Map <String,Table> tables = new TreeMap<>();
+    final private Map <String,Table> tables = new TreeMap<>();
 
     // Add a new Table and its columns
     public void addTable(int tableId, String tableName, Map<Integer, Column> columns){
