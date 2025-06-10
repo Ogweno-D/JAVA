@@ -94,11 +94,10 @@ public class CourseManager{
     public void displayStudentsByCourse()
     {
             courseMap.forEach((course, students)->{
-                System.out.println("\n Courses" + course);
+                System.out.println("Courses \n" + course);
                 students.forEach(System.out::println);
             });
     }
-
 
 
 }

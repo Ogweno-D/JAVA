@@ -50,5 +50,13 @@ public class Student{
     }
 
     // Overriding  functions for a better search
+    @Override
+    public String toString(){
+        return "Course " + course + " "+
+                "Student ID " + " "+ studentId + " " +
+                "Student name " + name +
+                " ";
+    }
+
     
 }
