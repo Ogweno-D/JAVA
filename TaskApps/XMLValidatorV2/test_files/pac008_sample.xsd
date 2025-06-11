@@ -1,0 +1,349 @@
+<!-- 
+    Well, corrected/generated? Potato patato - Mine is down below
+    Suffering so much- No comment ><
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- Root element matching the XML -->
+    <xs:element name="FIToFIPmtStsRpt" type="FIToFIPmtStsRptType" />
+
+    <!-- FIToFIPmtStsRptType -->
+    <xs:complexType name="FIToFIPmtStsRptType">
+        <xs:sequence>
+            <!-- GroupHeader is mandatory... -->
+            <xs:element name="GrpHdr" type="GrpHdrType"> 
+            </xs:element>
+            <xs:element name="OrgnlGrpInfAndSts" type="OrgnlGrpInfAndStsType">
+            </xs:element>
+            <xs:element name="TxInfAndSts" type="TxInfAndStsType">
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GrpHdrType">
+        <xs:sequence>
+            <xs:element name="MsgId" type="MsgIdType" />
+            <xs:element name="CreDtTm" type="xs:dateTime" />
+            <xs:element name="InstgAgt" type="InstgAgtType">
+            </xs:element>
+            <xs:element name="InstdAgt" type="InstdAgtType">
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="MsgIdType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="32">
+            </xs:maxLength>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="InstgAgtType">
+        <xs:sequence>
+            <xs:element name="FinInstnId" type="FinInstnIdType"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="InstdAgtType">
+        <xs:sequence>
+            <xs:element name="FinInstnId" type="FinInstnIdType"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FinInstnIdType">
+        <xs:sequence>
+            <xs:element name="Othr" type="OthrType"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OthrType">
+        <xs:sequence>
+            <xs:element name="Id">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="[0-9]+"></xs:pattern> <!--Numeric validation-->
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--  -->
+    <xs:complexType name="OrgnlGrpInfAndStsType">
+        <xs:sequence>
+            <xs:element name="OrgnlMsgId" type="OrgnlMsgIdType"></xs:element>
+            <xs:element name="OrgnlMsgNmId" type="xs:string"></xs:element>
+            <xs:element name="OrgnlCreDtTm" type="xs:dateTime"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="OrgnlMsgIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+"></xs:pattern>
+            <xs:maxLength value="32"></xs:maxLength>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--  -->
+    <xs:complexType name="TxInfAndStsType">
+        <xs:sequence>
+            <xs:element name="OrgnlTxRef" type="OrgnlTxRefType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrgnlTxRefType">
+        <xs:sequence>
+            <xs:element name="IntrBkSttlmAmt" type="AmountType"/>
+            <xs:element name="SttlmInf" type="SttlmInfType" minOccurs="0"/>
+            <xs:element name="PmtTpInf" type="PmtTpInfType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Amount with Currency -->
+    <xs:complexType name="AmountType">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="Ccy" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value="[A-Z]{3}"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Settlement Information -->
+    <xs:complexType name="SttlmInfType">
+        <xs:sequence>
+            <xs:element name="SttlmMtd" type="SttlmMtdType" minOccurs="0"/>
+            <xs:element name="ClrSys" type="ClrSysType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="SttlmMtdType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CLRG"/>
+            <xs:enumeration value="MADN"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ClrSysType">
+        <xs:sequence>
+            <xs:element name="Prtry" type="ClrSysPrtryType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ClrSysPrtryType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IPS"/>
+            <xs:enumeration value="PSA"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Payment Type Information -->
+    <xs:complexType name="PmtTpInfType">
+        <xs:sequence>
+            <xs:element name="SvcLvl" type="SvcLvlType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SvcLvlType">
+        <xs:sequence>
+            <xs:element name="Prtry" type="SvcLvlPrtryType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="SvcLvlPrtryType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="P2PT"/>
+            <xs:enumeration value="P2PI"/>
+            <xs:enumeration value="P2BT"/>
+            <xs:enumeration value="B2PT"/>
+            <xs:enumeration value="B2BT"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
+
+
+<!-- 
+    Blessed is the code that suffereth, for it shall be remembered!
+ -->
+
+<!-- <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name = "FIToFIPmtStsRp" type="FIToFIPmtStsRpType" /> -->
+
+    <!-- FIToFIPmtStsRpType -->
+
+    <!-- <xs:complexType name="FIToFIPmtStsRpType">
+        <xs:sequence > -->
+
+            <!-- GroupHeader is mandatory... -->
+            <!-- <xs:element name="GrpHdr" type= "GrpHdrType"> 
+            </xs:element>
+            <xs:element name="OrgnlGrpInfAndSts" type= "OrgnlGrpInfAndStsType">
+            </xs:element>
+            <xs:element name="TxInfAndSts" type= "TxInfAndStsType">
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType> -->
+
+    <!-- <xs:complexType name="GrpHdrType">
+        <xs:sequence>
+            <xs:element name="MsgId" type="xs:string" >
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="32">
+                        </xs:maxLength>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="CreDtTm" type="xs:dateTime" /> -->
+
+            <!-- Because there are  two of them -->
+            <!-- <xs:element name="InstgAgt" type="InstgAgtType">
+            </xs:element>
+            <xs:element name="InstgAgt" type="InstgAgtType">
+            </xs:elemen>
+        </xs:sequence>
+    </xs:complexType> -->
+
+<!-- This or the one above? -->
+    <!-- <xs:simpleType name="MsgIdType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="12">
+            </xs:maxLength>
+        </xs:restriction>
+    </xs:simpleType> -->
+
+<!-- 
+    <xs:complexType name="InstgAgtType">
+        <xs:sequence>
+            <xs:element name="FinInstId" type="FinInstIdType"></xs:element> -->
+        <!-- </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FinInstIdType">
+        <xs:sequence>
+            <xs:element name="Othr" type="OthrType"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OthrType">
+        <xs:sequence>
+            <xs:element name="Id">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"> -->
+                        <!-- <xs:pattern value="[0-9]+"></xs:pattern> Numeric validation -->
+                    <!-- </xs:restriction>
+                
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType> -->
+
+
+
+    <!--  -->
+    <!-- <xs:complexType name="OrgnlGrpInfAndStsType">
+        <xs:sequence>
+            <xs:element name="OrgnlMsgId" type="OrgnlMsgIdType"></xs:element>
+            <xs:element name="OrgnlMsgNmId" type="xs:string"></xs:element>
+            <xs:element name="OrgnlCreDtTm" type="xs:dateTime"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:simpleType name="OrgnlMsgIdType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value ="[0-9]+"></xs:pattern>
+            <xs:maxLength value="32"></xs:maxLength>
+        </xs:restriction>
+    </xs:simpleType> -->
+
+
+    <!--  -->
+<!-- 
+  <xs:complexType name="TxInfAndStsType">
+    <xs:sequence>
+      <xs:element name="OrgnlTxRef" type="OrgnlTxRefType"/>
+    </xs:sequence>
+  </xs:complexType> -->
+
+  <!-- <xs:complexType name="OrgnlTxRefType">
+    <xs:sequence>
+      <xs:element name="IntrBkSttlmAmt" type="AmountType"/>
+      <xs:element name="SttlmInf" type="SttlmInfType" minOccurs="0"/>
+      <xs:element name="PmtTpInf" type="PmtTpInfType"/>
+    </xs:sequence>
+  </xs:complexType> -->
+
+  <!-- Amount with Currency -->
+  <!-- <xs:complexType name="AmountType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="Ccy" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:pattern value="[A-Z]{3}"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType> -->
+
+  <!-- Settlement Information -->
+  <!-- <xs:complexType name="SttlmInfType">
+    <xs:sequence>
+      <xs:element name="SttlmMtd" type="SttlmMtdType" minOccurs="0"/>
+      <xs:element name="ClrSys" type="ClrSysType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="SttlmMtdType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CLRG"/>
+      <xs:enumeration value="MADN"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ClrSysType">
+    <xs:sequence>
+      <xs:element name="Prtry" type="ClrSysPrtryType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ClrSysPrtryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IPS"/>
+      <xs:enumeration value="PSA"/>
+    </xs:restriction>
+  </xs:simpleType> -->
+
+  <!-- Payment Type Information -->
+  <!-- <xs:complexType name="PmtTpInfType">
+    <xs:sequence>
+      <xs:element name="SvcLvl" type="SvcLvlType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SvcLvlType">
+    <xs:sequence>
+      <xs:element name="Prtry" type="SvcLvlPrtryType"/>
+    </xs:sequence>
+  </xs:complexType> -->
+
+  <!-- <xs:simpleType name="SvcLvlPrtryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="P2PT"/>
+      <xs:enumeration value="P2PI"/>
+      <xs:enumeration value="P2BT"/>
+      <xs:enumeration value="B2PT"/>
+      <xs:enumeration value="B2BT"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema> -->
+
