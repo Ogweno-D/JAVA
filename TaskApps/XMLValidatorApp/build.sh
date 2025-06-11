@@ -200,3 +200,5 @@ echo "1. Create test XML and XSD files in test-files/ directory"
 echo "2. Run the application with: java -jar $JAR_PATH -xml <xml> -xsd <xsd>"
 echo "3. Use the provided test script to run automated tests"
 echo End of build script
+
+

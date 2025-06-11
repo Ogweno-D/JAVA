@@ -3,5 +3,5 @@ Main-Class: com.xmlvalidator.XMLValidatorApp
 Created-By: XML Validator Build Script
 Implementation-Title: XML Validator Application
 Implementation-Version: 1.0.0
-Built-Date: Wed, Jun  4, 2025 12:26:51 PM
+Built-Date: Wed, Jun 11, 2025  1:59:35 PM
 
